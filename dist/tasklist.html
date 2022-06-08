@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="/index.c74267d1.css" rel="stylesheet" type="text/css">
+</head>
+
+<body class="app-container">
+
+    <nav class="vertical top-nav">
+        <ul class="nav-links">
+            <li class="nav-item"><a href="/index.html">Home</a></li>
+            <li class="nav-item"><a href="/tasklist.html" class="active">Tasks</a></li>
+        </ul>
+    </nav>
+
+    <div id="page1" class="page-container">
+        <h1>Tasks</h1>
+            <div id="task-grid">
+                <form id="taskform">
+                    <label for="task">Task:</label>
+                    <input type="text" name="task" id="taskInput" required="">
+
+                    <!-- Date input -->
+                    <label for="dueDate">Due Date: </label>
+                    <input type="date" name="dueDate" id="dueDateInput">
+
+                    <!-- Time input -->
+                    <label for="completionTime">Completion Time: </label>
+                    <input type="time" name="completionTime" id="completionTimeInput">
+
+                    <label for="estimatedTime">Estimated completion time (in mins):</label>
+                    <input type="number" name="estimatedTime" id="estimatedTimeInput">
+                    <!-- Priority -->
+
+
+                    <label for="priority">Task Priority:</label>
+                    <select name="prority" id="priorityInput">
+                        <option value="">Select one</option>
+                        <option value="Low">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+
+                    <br>
+
+                    <button type="submit">Submit</button>
+                </form>
+                <div id="tasklist">
+                    <p id="emptyList">You have not added any tasks yet.</p>
+                    <ul></ul>
+                </div>
+            </div>
+
+    </div>
+
+
+
+    <script src="/index.f3bd186e.js">
+</script>
+</body>
+
+</html>
