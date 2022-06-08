@@ -7,7 +7,7 @@
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "parcel build ./public/index.html",
-    "dev": "parcel serve ./public/index.html -p 8888 --no-cache"
+    "dev": "parcel serve ./public/index.html -p 8088 --no-cache"
   },
   "keywords": [
     "STUDBUD",
@@ -33,6 +33,7 @@
   "dependencies": {
     "dragula": "^3.7.3",
     "express": "^4.18.1",
+    "flatted": "^3.2.5",
     "sass": "^1.51.0"
   },
   "devDependencies": {

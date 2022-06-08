@@ -276,9 +276,12 @@
                     border: 2px solid var(--color);
                     border-radius: 5px;
                     padding-left: 10px;
+                    padding-top: 7px;
+                    display: flex;
 
                     a {
                         color: var(--color);
+                        width: 343px;
                     }
 
                     a:hover {
@@ -288,8 +291,7 @@
                     button {
                         position: relative;
                         font-size: 20px;
-                        left: 290px;
-                        top: 2px;
+                        top: -4px;
                     }
                 }
                 .link:first-child {

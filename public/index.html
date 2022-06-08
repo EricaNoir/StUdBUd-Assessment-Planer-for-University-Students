@@ -36,15 +36,15 @@
       <h1 class="formTitle">Add a resource</h1>
       <div class="inputContainer">
         <h3 class="inputText">Title</h3>
-        <input type="text" class="courseNamaInput" placeholder="This is a course called...">
+        <input type="text" class="linkNamaInput" id="linkNameInput" placeholder="This is a course called...">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">Link</h3>
-        <input type="text" class="courseCodeInput" placeholder="Code">
+        <input type="text" class="linkInput" id="linkInput" placeholder="Code">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">DESCRIPTION</h3>
-        <input type="text" class="courseDesInput" placeholder="This is a course about...">
+        <input type="text" class="linkDesInput" id="linkDesInput" placeholder="This is a course about...">
       </div>
       <button type="reset" class="cancel-button" id="linkDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
       <button type="submit" class="add-button" id="linkAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
@@ -105,7 +105,7 @@
       <div class="nav" id="lNav">
         <svg class="navLine" id="lNavLine" viewBox="0 0 5 37"></svg>
         <h1>Links</h1>
-        <button class="add" id="lAdd" onclick="createLink()">✕</button>
+        <button class="add" id="lAdd">✕</button>
       </div> 
       <div id="linkContainer">
         <div class="link">

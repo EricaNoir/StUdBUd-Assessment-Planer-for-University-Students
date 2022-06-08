@@ -19,6 +19,84 @@ const courseContainer = document.getElementById("courseContainer")
 
 const coursePage = document.getElementById("courseView");
 
+const addLinkForm = document.getElementById("addLinkForm");
+const linkNameInput = document.getElementById("linkNameInput");
+const linkInput = document.getElementById("linkInput");
+const linkDesInput = document.getElementById("linkDesInput");
+const linkContainer = document.getElementById("linkContainer");
+
+const lNav = document.getElementById("lNav");
+
+
+const assContainerInCourse = document.getElementById("assContainerInCourse");
+
+lNav.addEventListener("click", function(event) {
+  if (event.target.classList.contains('add')) {
+    addLinkForm.style.visibility = "visible";
+
+  }
+})
+
+linkContainer.addEventListener('click', function(event) {
+  if (event.target.classList.contains("delete-button")) {
+    deleteLink(event.target.parentElement.getAttribute('data-key'),event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('data-key'));
+  }
+
+})
+
+addLinkForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+  addLink(linkNameInput.value, linkInput.value, linkDesInput.value, addLinkForm.getAttribute("data-key"));
+  linkNameInput.value = "";
+  linkInput.value = "";
+  linkDesInput.value = "";
+})
+
+addLinkForm.addEventListener("reset", function(event) {
+  addLinkForm.style.visibility = "hidden";
+})
+
+function addLink(linkNameInput, linkInput, linkDesInput, id) {
+  if (linkNameInput !== "" && linkInput !== "" && linkDesInput !== "") {
+    const link = new Link(linkNameInput, linkInput, linkDesInput, id);
+    const course = getCourseById(id);
+    course.links.push(link);
+    //addCoursesToLocalStorage(courses);
+    showDetails(course);
+    addLinkForm.style.visibility = "hidden";
+  }
+}
+
+function deleteLink(id, courseId) {
+  const course = getCourseById(courseId);
+  course.links = course.links.filter(function(link) {
+    return link.id != id;
+  })
+  showDetails(course);
+}
+
+function showDetails(course) {
+  linkContainer.innerHTML = ``;
+  for (var i = 0; i < course.links.length; i++) {
+    printLink(course.links[i]);
+  }
+  assContainerInCourse.innerHTML = `
+  
+  `;
+}
+
+function printLink(l) {
+  const link = document.createElement("div");
+  link.setAttribute('class', 'link');
+  link.setAttribute('data-key', l.id);
+  link.innerHTML = `
+    <a href="" target="_blank">${l.name}</a>
+    <button class="delete-button">✕</button>
+  `;
+  link.children[0].href= l.link;
+
+  linkContainer.appendChild(link);
+}
 
 
 //array storing the courses
@@ -45,27 +123,15 @@ function Course(courseName, courseCode, courseDes) {
   this.id = Date.now();
   this.color = getRandomColor();
 
-  //show asses & links of course c
-  this.showDetails = function() {
 
-  }
-  
-  this.addLink = function() {
+}
 
-  }
-
-  this.deletLink = function() {
-
-  }
-
-  this.addAssessment = function() {
-
-  }
-  
-  this.deleteAssessment = function() {
-
-  }
-
+function Link(linkName, link, linkDes, id) {
+  this.name = linkName;
+  this.link = link;
+  this.linkDes = linkDes;
+  this. id = Date.now();
+  this.course = getCourseById(id);
 }
   
 function Assessment(name, description, timeToComplete, course, priority, dueDate, completion) {
@@ -131,6 +197,7 @@ function addCourse(courseNameInput, courseCodeInput, courseDesInput) {
     courses.push(course);
     //store
     addCoursesToLocalStorage(courses);
+    renderCourse(courses);
     addCourseForm.style.visibility = "hidden";
     
   } 
@@ -141,6 +208,7 @@ function deleteCourse(id) {
     return course.id != id;
   })
   addCoursesToLocalStorage(courses);
+  renderCourse(courses);
 }
 
 
@@ -149,8 +217,9 @@ function openCouse(id) {
   const course = getCourseById(id);
   coursePage.style.cssText = "visibility: visible;";
   coursePage.setAttribute("data-key", id); 
+  addLinkForm.setAttribute("data-key", id); 
   coursePage.style.setProperty("--color", course.color);
-  course.showDetails();
+  showDetails(course);
 
 }
 
@@ -203,7 +272,6 @@ function coursehtml(c) {
 
 function addCoursesToLocalStorage(courses) {
   localStorage.setItem("courses", JSON.stringify(courses));
-  renderCourse(courses);
 }
 
 function getCourseFromLocalStorage() {
