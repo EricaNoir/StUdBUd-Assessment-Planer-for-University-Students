@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Almarai:400');
+
+html {font-size: 100%;} /*16px*/
+
+body {
+  background: white;
+  font-family: SF Pro;
+  font-weight: 400;
+  line-height: 1.75;
+  color: #000000;
+}
+
+p {
+  font-size: 13px;
+  font-weight: semibold;
+  color: #6B6B6B;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: SF Pro;
+}
+
+h1 {
+  font-size: 28px;
+}
+
+h2 {
+  font-size: 19px;
+  font-weight: semibold;
+}
+
+h3 {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 15px;
+  font-weight: semibold;
+}
+
+small, .text_small {font-size: 0.8rem;}

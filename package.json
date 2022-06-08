@@ -1,0 +1,42 @@
+{
+  "name": "studbud",
+  "version": "1.0.0",
+  "description": "DECO2017",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prestart": "parcel build ./public/index.html",
+    "dev": "parcel serve ./public/index.html -p 8888 --no-cache"
+  },
+  "keywords": [
+    "STUDBUD",
+    "StudBud",
+    "Time",
+    "Management",
+    "Content",
+    "Music",
+    "Study",
+    "Management",
+    "Study"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EricaNoir/studbud.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EricaNoir/studbud/issues"
+  },
+  "homepage": "https://github.com/EricaNoir/studbud#readme",
+  "dependencies": {
+    "dragula": "^3.7.3",
+    "express": "^4.18.1",
+    "sass": "^1.51.0"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.5.0",
+    "parcel": "^2.5.0"
+  }
+}

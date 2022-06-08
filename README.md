@@ -1,1 +1,2 @@
-# StUdBUd_DECO2017
+# studbud
+DECO2017
