@@ -35,16 +35,16 @@
     <form class="addForm" id="linkForm">
       <h1 class="formTitle">Add a resource</h1>
       <div class="inputContainer">
-        <h3 class="inputText">Title</h3>
-        <input type="text" class="linkNamaInput" id="linkNameInput" placeholder="This is a course called...">
+        <h3 class="inputText">TITLE</h3>
+        <input type="text" class="linkNamaInput" id="linkNameInput" placeholder="This is a resource called...">
       </div>
       <div class="inputContainer">
-        <h3 class="inputText">Link</h3>
-        <input type="text" class="linkInput" id="linkInput" placeholder="Code">
+        <h3 class="inputText">LINK</h3>
+        <input type="url" class="linkInput" id="linkInput" placeholder="Url...">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">DESCRIPTION</h3>
-        <input type="text" class="linkDesInput" id="linkDesInput" placeholder="This is a course about...">
+        <input type="text" class="linkDesInput" id="linkDesInput" placeholder="This is a resource about...">
       </div>
       <button type="reset" class="cancel-button" id="linkDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
       <button type="submit" class="add-button" id="linkAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
@@ -52,6 +52,43 @@
     </form>
   </div>
 
+  <div class = "darkBkg" id="addAssForm">
+    <form class="addForm" id="assForm">
+      <h1 class="form-title">Add an assessment</h1>
+      <div class="inputContainer">
+        <h3 class="inputText">NAME</h3>
+        <input type="text" class="assNameInput" id="assNameInput" placeholder="Assessment called...">
+      </div>
+
+      <div class="inputContainer">
+        <h3 class="inputText">DESCRIPTION</h3>
+        <input type="text" class="assDesInput" id="assDesInput" placeholder="Percentage / explanation">
+      </div>
+
+      <div class="inputContainer">
+        <h3 class="inputText">ESTIMATED COMPLETION TIME</h3>
+        <input type="time" class="assTimeToCompleteInput" id="assTimeToCompleteInput">
+      </div>
+
+      <div class="inputContainer">
+        <h3 class="inputText">DUE DATE</h3>
+        <input type="date" class="assDueDateInput" id="assDueDateInput">
+      </div>
+
+      <div class="inputContainer">
+        <h3 class="inputText">PRIORITY</h3>
+        <select name="prority" class="assPriorityInput" id="assPriorityInput">
+          <option value="">Select one</option>
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+      </select>
+      </div>
+
+      <button type="reset" class="cancel-button" id="assDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
+      <button type="submit" class="add-button" id="assAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
+    </form>
+  </div>
 
   <!--navbar-->
   <div class="homebar" id="homeView">
@@ -86,7 +123,7 @@
       <div class="nav" id="aNav">
         <svg class="navLine" id="aNavLine" viewBox="0 0 5 37"></svg>
         <h1>Assessments</h1>
-        <button class="add" id="aAdd" onclick="createAssessmentInHomePage()">✕</button>
+      
       </div> 
       <div id="assContainer">
       </div>
@@ -123,11 +160,46 @@
       <div class="nav" id="aNavInCourse">
         <svg class="navLine" id="aNavLineInCourse" viewBox="0 0 5 37"></svg>
         <h1>Assessments</h1>
-        <button class="add" id="aAddInCourse" onclick="createAssessmentInCoursePage()">
+        <button class="add" id="aAddInCourse">
           ✕
         </button>
       </div> 
       <div id="assContainerInCourse">
+
+        <div class="ass">
+          <div class="colorBar">
+          </div>
+          <div class="assInfo">
+            <h3 class="assName">A2_Web App Pitch</h3>
+            <p class="percentage">40%</p>
+            <p class="completionTime">7 days</p>
+            <h4 class="ddl">Apr 15</h4>
+            <button class="delete-button">
+              Complete
+            </button>
+            <div class="priority">
+              <h5 class="priority">High</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="ass">
+          <div class="colorBar">
+          </div>
+          <div class="assInfo">
+            <h3 class="assName">A2_Web App Pitch</h3>
+            <p class="percentage">40%</p>
+            <p class="completionTime">7 days</p>
+            <h4 class="ddl">Apr 15</h4>
+            <button class="delete-button">
+              Complete
+            </button>
+            <div class="priority">
+              <h5 class="priority">High</h5>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -143,17 +215,13 @@
         <div class="colorBar">
         </div>
         <div class="assInfo">
-          <div class="mark">
-            <h2 class="finalMark">-</h2>
-            <h2 class="slash">&nbsp;/&nbsp;</h2>
-            <h2 class="totalMark">40</h2>
-          </div>
+          <button class="delete-button">
+            Complete
+          </button>
           <h3 class="assName">A2_Web App Pitch</h3>
           <h4 class="ddl">Apr 15</h4>
-          <div class="completion">
-            <h5 class="completed">1</h5>
-            <h5 class="slash">&nbsp;/&nbsp;</h5>
-            <h5 class="totalPart">5 DONE</h5>
+          <div class="priority">
+            <h5 class="priority">High</h5>
           </div>
           <p class="percentage">40%</p>
           <p class="completionTime">7 days</p>
@@ -227,7 +295,7 @@
 
 
 
-  <script src="js/kanban.js">
+  <script src="js/script.js" >
   </script>
 </body>
 

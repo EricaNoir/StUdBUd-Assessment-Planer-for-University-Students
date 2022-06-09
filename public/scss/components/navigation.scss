@@ -1,5 +1,5 @@
 .app-container {
-    #addLinkForm {
+    #addAssForm {
         //visibility: visible;
     }
     
@@ -122,6 +122,39 @@
 
         }
     }
+
+    #assForm {
+
+        height: 700px;
+
+        h1 {
+            font-size: 32px;
+        }
+
+        .inputContainer {
+
+            margin-top: 20px;
+        }
+        select {
+            width: 300px;
+            height: 50px;
+            outline: none;
+            border-radius: 10px;
+            border: 2px solid #B2B2B2;
+            -webkit-transition: 0.3s;
+            transition: 0.3s;
+            padding-left: 10px;
+            font: SF Pro;
+            font-size: 22px;
+            color: #474747;
+        }
+
+        button {
+            
+            top: 40px;
+        }
+    }
+
     .homebar {
         width: 454px;
         height: 100%;
@@ -205,9 +238,6 @@
                     color: #5D95BF;
                     
                 }
-                #aAdd, #aAddInCourse {
-                    color: #229722;
-                }
             }
 
             #courseContainer {
@@ -224,10 +254,7 @@
 
         #assessments, #assessmentsInCourse {
             top: 55px;
-    
-            #aNavLine, #aNavLineInCourse {
-                background-color: rgba(34,151,34,1); 
-            }
+
     
         }
 
@@ -252,13 +279,14 @@
             top: 31px;
         }
 
-        #courseName, button {
+        #courseName, button.add {
             color: var(--color);
         }
 
-        #lNavLine {
+        #lNavLine, #aNavLineInCourse {
             background-color: var(--color);
         }
+
 
         #links {
             #linkContainer {
@@ -299,6 +327,22 @@
                 }
             }
         }
+
+        #assessmentsInCourse {
+    
+            #assContainerInCourse {
+                width: 390px;
+                flex-direction: column;
+                display: flex;
+                justify-content: space-between;
+
+
+
+                button.delete-button {
+                    color: white;
+                }
+            }
+        }
     }
     
 
@@ -334,8 +378,11 @@
 
                 .assInfo {
                     width: 100%;
-                    .mark, .completion {
-                        right: 100px;
+                    button {
+                        visibility: hidden;
+                    }
+                    .priority {
+                        right: 50px;
                     }
                 }
             }

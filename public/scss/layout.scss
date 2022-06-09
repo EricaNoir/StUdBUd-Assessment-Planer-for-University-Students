@@ -28,6 +28,7 @@ div.ass {
 	width: 400px;
 	height: 110px;
 	border-radius: 15px;
+	margin-top: 25px;
 	background-color: #F3F3F3;
 	.colorBar {
 		position: absolute;
@@ -40,30 +41,43 @@ div.ass {
 		h2, h3, h4, h5 {
 			color: var(--color);
 		}
-		position: absolute;
-		left: 64px;
-		top: 11px;
 		width: 345px;
-		height: 88px;
-		.mark {
+		height: 92px;
+		position: relative;
+		top: 9px;
+		left: 42px;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-content: space-between;
+		align-items: stretch;
+		button {
 			display: flex;
-			position: absolute;
 			right: 0px;
-			background-color: rgba(1, 1, 1, 0);
+			background-color: var(--color);
+			color: white;
+			width: 67px;
+            height: 23px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin: 0 auto;
+            position: relative;
 		}
 		.ddl {
-			position: absolute;
+			position: relative;
 			bottom: 0px;
 		}
-		.completion {
-			display: flex;
-			position: absolute;
-			bottom: -9px;
-			right: 0px;
+		.priority {
+			position: relative;
+			bottom: -5px;
+			text-align: right;
+			right: 2px;
 		}
+		
 		p {
 			position: relative;
-			top: 4px;
+			top: 1px;
 		}
 	}
 
