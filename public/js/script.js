@@ -53,17 +53,22 @@ aNavInCourse.addEventListener("click", function(event) {
 
 linkContainer.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
-    deleteLink(event.target.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('data-key'));
+    deleteLink(event.target.parentElement.getAttribute('data-key'), addLinkForm.getAttribute("data-key"));
   }
 
 })
 
 assContainerInCourse.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
-    deleteAss(event.target.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.parentElement.parentElement.getAttribute('data-key'));
+    deleteAss(event.target.parentElement.parentElement.getAttribute('data-key'), addAssForm.getAttribute("data-key"));
   }
 })
-
+assContainer.addEventListener('click', function(event) {
+  if (event.target.classList.contains("delete-button")) {
+    deleteAss_b(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
+    
+  }
+})
 
 addLinkForm.addEventListener("submit", function(event) {
   event.preventDefault();
@@ -73,8 +78,21 @@ addLinkForm.addEventListener("submit", function(event) {
   linkDesInput.value = "";
 })
 
+addAssForm.addEventListener("submit", function(event) {
+  event.preventDefault();
+  addAss(assNameInput.value, assDesInput.value, assTimeToCompleteInput.value, assDueDateInput.value, assPriorityInput.options[assPriorityInput.selectedIndex].value, addAssForm.getAttribute("data-key"));
+  assNameInput.value = "";
+  assDesInput.value = "";
+  assTimeToCompleteInput.value = "";
+  assDueDateInput.value = "";
+})
+
 addLinkForm.addEventListener("reset", function(event) {
   addLinkForm.style.visibility = "hidden";
+})
+
+addAssForm.addEventListener("reset", function(event) {
+  addAssForm.style.visibility = "hidden";
 })
 
 function addLink(linkNameInput, linkInput, linkDesInput, id) {
@@ -84,10 +102,31 @@ function addLink(linkNameInput, linkInput, linkDesInput, id) {
     course.links.push(link);
     addCoursesToLocalStorage(courses);
     showDetails(course);
-    console.log(courses);
     addLinkForm.style.visibility = "hidden";
   }
 }
+
+function addAss(assNameInput, assDesInput, assTimeToCompleteInput, assDueDateInput, assPriorityInput, id) {
+  if (assNameInput !== "" && assDesInput !== "" && assTimeToCompleteInput !== "" && assDueDateInput !== "") {
+    const ass = new Assessment(assNameInput, assDesInput, assTimeToCompleteInput, assDueDateInput, assPriorityInput, id);
+    const course = getCourseById(id);
+    course.assessments.push(ass);
+    course.assessments = course.assessments.sort(dateData("dueDate"));
+    addCoursesToLocalStorage(courses);
+    showDetails(course);
+    addAssForm.style.visibility = "hidden";
+  }
+}
+
+function dateData(property) {
+	return function(a, b) {
+		var value1 = a[property];
+		var value2 = b[property];
+		return Date.parse(value1) - Date.parse(value2);
+
+	}
+}
+
 
 function deleteLink(id, courseId) {
   const course = getCourseById(courseId);
@@ -98,14 +137,59 @@ function deleteLink(id, courseId) {
   showDetails(course);
 }
 
+function deleteAss(id, courseId) {
+  const course = getCourseById(courseId);
+  course.assessments = course.assessments.filter(function(ass) {
+    return ass.id != id;
+  })
+  addCoursesToLocalStorage(courses);
+  showDetails(course);
+}
+function deleteAss_b(id, courseId) {
+  const course = getCourseById(courseId);
+  course.assessments = course.assessments.filter(function(ass) {
+    return ass.id != id;
+  })
+  addCoursesToLocalStorage(courses);
+  getCourseFromLocalStorage();
+}
+
 function showDetails(course) {
   linkContainer.innerHTML = ``;
   for (var i = 0; i < course.links.length; i++) {
     printLink(course.links[i]);
   }
-  //assContainerInCourse.innerHTML = ``;
+  assContainerInCourse.innerHTML = ``;
+  for (var i = 0; i < course.assessments.length; i++) {
+    printAss(course.assessments[i]);
+  }
 }
 
+function printAss(a) {
+  const ass = document.createElement("div");
+  const color = getCourseById(a.courseId).color;
+  ass.style.setProperty("--color", color);
+  ass.setAttribute('class', 'ass');
+  ass.setAttribute('data-key', a.id);
+  ass.innerHTML = `
+    <div class="colorBar">
+    </div>
+    <div class="assInfo">
+      <h3 class="assName">${a.name}</h3>
+      <p class="percentage">${a.description}</p>
+      <p class="completionTime">Need ${a.timeToComplete} to complete</p>
+      <h4 class="ddl">Due at ${a.dueDate}</h4>
+      <button class="delete-button">
+        Complete
+      </button>
+      <div class="priority">
+        <h5 class="priority">${a.priority}</h5>
+      </div>
+    </div>
+  
+  `;
+  assContainerInCourse.appendChild(ass);
+}
 function printLink(l) {
   const link = document.createElement("div");
   link.setAttribute('class', 'link');
@@ -155,17 +239,16 @@ function Link(linkName, link, linkDes, id) {
   this.courseId = id;
 }
   
-function Assessment(name, description, timeToComplete, course, priority, dueDate, completion) {
+function Assessment(name, description, timeToComplete, dueDate, priority, id) {
   let taskTodo = [];
   let taskInprogress = [];
   let taskDone = [];
   this.name = name;
   this.description = description;
   this.timeToComplete = timeToComplete;
-  this.courseCode = course;
-  this.priority = priority;
   this.dueDate = dueDate;
-  this.completion = completion;
+  this.priority = priority;
+  this.courseId = id;
 
   this.taskTodo = taskTodo;
   this.taskInprogress = taskInprogress;
@@ -239,6 +322,7 @@ function openCouse(id) {
   coursePage.style.cssText = "visibility: visible;";
   coursePage.setAttribute("data-key", id); 
   addLinkForm.setAttribute("data-key", id); 
+  addAssForm.setAttribute("data-key", id); 
   coursePage.style.setProperty("--color", course.color);
   showDetails(course);
 
@@ -253,10 +337,50 @@ function getCourseById(id) {
 
 function renderCourse(courses) {
   courseContainer.innerHTML = ``;
+  console.log("fuck");
   for (var i = 0; i < courses.length; i++){
     coursehtml(courses[i]);
   }
+  console.log("yes");
+  assContainer.innerHTML = ``;
+  let assToShow = [];
+  for (var i = 0; i < courses.length; i++) {
+    for (var j = 0; j < courses[i].assessments.length; j++) {
+      assToShow.push(courses[i].assessments[j]);
+    }
+  }
+  assToShow = assToShow.sort(dateData("dueDate"));
+  for (var i = 0; i < assToShow.length; i++) {
+    asshtml(assToShow[i]);
+  }
 
+}
+
+function asshtml(a) {
+  const ass = document.createElement("div");
+  const color = getCourseById(a.courseId).color;
+  ass.style.setProperty("--color", color);
+  ass.setAttribute('class', 'ass');
+  ass.setAttribute('data-key', a.id);
+  ass.setAttribute('course-id', a.courseId);
+  ass.innerHTML = `
+    <div class="colorBar">
+    </div>
+    <div class="assInfo">
+      <h3 class="assName">${a.name}</h3>
+      <p class="percentage">${a.description}</p>
+      <p class="completionTime">Need ${a.timeToComplete} to complete</p>
+      <h4 class="ddl">Due at ${a.dueDate}</h4>
+      <button class="delete-button">
+        Complete
+      </button>
+      <div class="priority">
+        <h5 class="priority">${a.priority}</h5>
+      </div>
+    </div>
+  
+  `;
+  assContainer.appendChild(ass);
 }
 
 function coursehtml(c) {
@@ -279,9 +403,9 @@ function coursehtml(c) {
   }    
   else {
     course.innerHTML = `
-    <div class="courseDeco">
-      <h2>${c.code}</h2>
-    </div>
+    <button class="courseDeco">
+      ${c.code}
+    </button>
     <h3 class="recent">Recent Task:</h3>
     <h4>${c.assessments[0].name}</h4>
     <button class="delete-button" id="cDelete">✖</button>
