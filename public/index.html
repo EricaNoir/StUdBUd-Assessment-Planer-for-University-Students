@@ -26,8 +26,8 @@
         <h3 class="inputText">DESCRIPTION</h3>
         <input type="text" class="courseDesInput" placeholder="This is a course about...">
       </div>
-      <button type="reset" class="cancel-button" id="courseDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
-      <button type="submit" class="add-button" id="courseAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
+      <button type="reset" class="cancel-button" title="Cancel" id="courseDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
+      <button type="submit" class="add-button" title="Save the course" id="courseAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
     </form>
   </div>
 
@@ -46,8 +46,8 @@
         <h3 class="inputText">DESCRIPTION</h3>
         <input type="text" class="linkDesInput" id="linkDesInput" placeholder="This is a resource about...">
       </div>
-      <button type="reset" class="cancel-button" id="linkDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
-      <button type="submit" class="add-button" id="linkAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
+      <button type="reset" class="cancel-button" title="Cancel" id="linkDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
+      <button type="submit" class="add-button" title="Save the link" id="linkAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
 
     </form>
   </div>
@@ -85,8 +85,8 @@
       </select>
       </div>
 
-      <button type="reset" class="cancel-button" id="assDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
-      <button type="submit" class="add-button" id="assAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
+      <button type="reset" class="cancel-button" title="Cancel" id="assDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
+      <button type="submit" class="add-button" title="Save the assessment" id="assAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
     </form>
   </div>
 
@@ -103,7 +103,7 @@
       <div class="nav" id="cNav">
         <svg class="navLine" id="cNavLine" viewBox="0 0 5 37"></svg>
         <h1>Courses</h1>
-        <button class="add" id="cAdd" onclick="createCourse()">✕</button>
+        <button class="add" id="cAdd" title="Add a course" onclick="createCourse()">✕</button>
       </div> 
       <div id="courseContainer">
         <!--div class="course" data-key="12345678" onclick="createCourse()">
@@ -135,24 +135,24 @@
       <div class="logo" id="courseName">
         DECO2017
       </div>
-      <button class="back-home" onclick="backHome()">Done</button>
+      <button class="back-home" title="Back to home page" onclick="backHome()">Done</button>
 		</div>
 
     <div class="block"  id="links">
       <div class="nav" id="lNav">
         <svg class="navLine" id="lNavLine" viewBox="0 0 5 37"></svg>
         <h1>Links</h1>
-        <button class="add" id="lAdd">✕</button>
+        <button class="add" title="Add a link" id="lAdd">✕</button>
       </div> 
       <div id="linkContainer">
-        <div class="link">
+        <!--div class="link">
           <a href="https://cn.fflogs.com/character/id/15254413" target="_blank">FF Logs</a>
           <button class="delete-button">✕</button>
         </div>
         <div class="link">
           <a href="https://cn.fflogs.com/character/id/15254413" target="_blank">FF Logs</a>
           <button class="delete-button">✕</button>
-        </div>
+        </div-->
       </div>
     </div>
 
@@ -160,13 +160,13 @@
       <div class="nav" id="aNavInCourse">
         <svg class="navLine" id="aNavLineInCourse" viewBox="0 0 5 37"></svg>
         <h1>Assessments</h1>
-        <button class="add" id="aAddInCourse">
+        <button class="add" title="Add an assessment" id="aAddInCourse">
           ✕
         </button>
       </div> 
       <div id="assContainerInCourse">
 
-        <div class="ass">
+        <!--div class="ass">
           <div class="colorBar">
           </div>
           <div class="assInfo">
@@ -198,7 +198,7 @@
               <h5 class="priority">High</h5>
             </div>
           </div>
-        </div>
+        </div-->
 
       </div>
     </div>
@@ -235,7 +235,6 @@
         <div class="nav"  id="toDoNav">
             <svg id="tNavLine" viewBox="0 0 5 37"></svg>
             <h1 id="t">To Do</h1>
-            <h1 class="num" id="toDoNum">0</h1>
         </div>
         <!--tasks-->
         <div class="tasks" id="tTasksContainer">
@@ -264,7 +263,6 @@
         <div class="nav"  id="inProgressNav">
             <svg id="iNavLine" viewBox="0 0 5 37"></svg>
             <h1 id="i">In progress</h1>
-            <h1 class="num" id="inProgressNum">0</h1>
         </div>
         <!--tasks-->
         <div class="tasks" id="iTasksContainer">
@@ -279,7 +277,6 @@
         <div class="nav"  id="doneNav">
             <svg id="dNavLine" viewBox="0 0 5 37"></svg>
             <h1 id="d">Done</h1>
-            <h1 class="num" id="doneNum">0</h1>
         </div>
         <!--tasks-->
         <div class="tasks" id="dTasksContainer">

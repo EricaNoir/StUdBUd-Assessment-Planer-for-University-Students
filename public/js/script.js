@@ -38,6 +38,8 @@ const assPriorityInput = document.getElementById("assPriorityInput");
 const assContainerInCourse = document.getElementById("assContainerInCourse");
 const assContainer = document.getElementById("assContainer");
 
+
+
 lNav.addEventListener("click", function(event) {
   if (event.target.classList.contains('add')) {
     addLinkForm.style.visibility = "visible";
@@ -58,16 +60,64 @@ linkContainer.addEventListener('click', function(event) {
 
 })
 
+const kanban = document.getElementById('kanban');
+
+function getAssById(id, course) {
+  return course.assessments.find(function(ass) {
+    return ass.id == id;
+  })
+}
+
+function openAss(id, courseId) {
+  const course = getCourseById(courseId);
+  console.log(course);
+  if (course != null) {
+    const ass = getAssById(id, course);
+    console.log(ass);
+    if (ass != null) {
+      kanban.style.visibility = "visible";
+      kanban.setAttribute("data-key", id);
+      kanban.setAttribute("course-id", courseId);
+      const assInKanban = document.getElementById("assInKanban");
+      assInKanban.style.setProperty("--color", course.color);
+      assInKanban.innerHTML = `
+        <div class="colorBar">
+        </div>
+        <div class="assInfo">
+          <h3 class="assName">${ass.name}</h3>
+          <p class="percentage">${ass.description}</p>
+          <p class="completionTime">Need ${ass.timeToComplete} to complete</p>
+          <h4 class="ddl">Due at ${ass.dueDate}</h4>
+          <button class="delete-button">
+            Complete
+          </button>
+          <div class="priority">
+            <h5 class="priority">${ass.priority}</h5>
+          </div>
+        </div>
+      `;
+      renderTasks();
+    }
+    
+  }
+  
+
+
+}
+
 assContainerInCourse.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
     deleteAss(event.target.parentElement.parentElement.getAttribute('data-key'), addAssForm.getAttribute("data-key"));
+    //openAss(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
   }
+
 })
 assContainer.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
     deleteAss_b(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
-    
+    openAss(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
   }
+
 })
 
 addLinkForm.addEventListener("submit", function(event) {
@@ -166,11 +216,14 @@ function showDetails(course) {
 }
 
 function printAss(a) {
-  const ass = document.createElement("div");
+  const ass = document.createElement("button");
   const color = getCourseById(a.courseId).color;
   ass.style.setProperty("--color", color);
   ass.setAttribute('class', 'ass');
   ass.setAttribute('data-key', a.id);
+  ass.setAttribute('course-id', a.courseId);
+  ass.setAttribute('title', "View kanban board of this assessment");
+  ass.setAttribute('onclick', "openAss(" + a.id + "," + a.courseId + ")");
   ass.innerHTML = `
     <div class="colorBar">
     </div>
@@ -179,7 +232,7 @@ function printAss(a) {
       <p class="percentage">${a.description}</p>
       <p class="completionTime">Need ${a.timeToComplete} to complete</p>
       <h4 class="ddl">Due at ${a.dueDate}</h4>
-      <button class="delete-button">
+      <button class="delete-button" title="Mark as completed">
         Complete
       </button>
       <div class="priority">
@@ -195,8 +248,8 @@ function printLink(l) {
   link.setAttribute('class', 'link');
   link.setAttribute('data-key', l.id);
   link.innerHTML = `
-    <a href="" target="_blank">${l.name}</a>
-    <button class="delete-button">✕</button>
+    <a href="" target="_blank" title="Visit this resource">${l.name}</a>
+    <button class="delete-button" title="Delete this link">✕</button>
   `;
   link.children[0].href= l.link;
 
@@ -207,13 +260,15 @@ function printLink(l) {
 //array storing the courses
 let courses = [];
 
-let colors = ["#6D9CA6", "#5B8E7D", "#8EAD7A", "#C0CB77", 
-              "#F4C26F", "#7EA9CE", "#AE7FB5", "#BC4B51", 
-              "#DB7F5D", "#F4A259", "#8C6D67"];
+let colors = ["#AE7FB5","#5B8E7D", "#BC4B51", "#F4A259", 
+              "#8C6D67", "#C0CB77", "#7EA9CE", "#6D9CA6",   
+              "#DB7F5D", "#8EAD7A"];
+
+let i = 0;
 
 function getRandomColor() {
-  let i = Math.floor(Math.random() * colors.length);
-  return colors[i];
+  i += 1;
+  return colors[i-1];
 }
 
 function Course(courseName, courseCode, courseDes) {
@@ -337,11 +392,9 @@ function getCourseById(id) {
 
 function renderCourse(courses) {
   courseContainer.innerHTML = ``;
-  console.log("fuck");
   for (var i = 0; i < courses.length; i++){
     coursehtml(courses[i]);
   }
-  console.log("yes");
   assContainer.innerHTML = ``;
   let assToShow = [];
   for (var i = 0; i < courses.length; i++) {
@@ -357,12 +410,14 @@ function renderCourse(courses) {
 }
 
 function asshtml(a) {
-  const ass = document.createElement("div");
+  const ass = document.createElement("button");
   const color = getCourseById(a.courseId).color;
   ass.style.setProperty("--color", color);
   ass.setAttribute('class', 'ass');
   ass.setAttribute('data-key', a.id);
   ass.setAttribute('course-id', a.courseId);
+  ass.setAttribute('title', "View kanban board of this assessment");
+  ass.setAttribute('onclick', "openAss(" + a.id + "," + a.courseId + ")");
   ass.innerHTML = `
     <div class="colorBar">
     </div>
@@ -371,7 +426,7 @@ function asshtml(a) {
       <p class="percentage">${a.description}</p>
       <p class="completionTime">Need ${a.timeToComplete} to complete</p>
       <h4 class="ddl">Due at ${a.dueDate}</h4>
-      <button class="delete-button">
+      <button class="delete-button" title="Mark as completed">
         Complete
       </button>
       <div class="priority">
@@ -393,22 +448,22 @@ function coursehtml(c) {
   
   if (c.assessments.length == 0) {
     course.innerHTML = `
-      <button class="courseDeco">
+      <button class="courseDeco" title="View more">
         ${c.code}
       </button>
       <h3 class="recent">Recent Task:</h3>
       <h4></h4>
-      <button class="delete-button" id="cDelete">✖</button>
+      <button class="delete-button" title="Delete this course" id="cDelete">✖</button>
     `;
   }    
   else {
     course.innerHTML = `
-    <button class="courseDeco">
+    <button class="courseDeco" title="View more">
       ${c.code}
     </button>
     <h3 class="recent">Recent Task:</h3>
     <h4>${c.assessments[0].name}</h4>
-    <button class="delete-button" id="cDelete">✖</button>
+    <button class="delete-button" title="Delete this course" id="cDelete">✖</button>
   `;
   }
   //document.querySelector(".courseDeco").style.color = color;
@@ -449,26 +504,21 @@ let todos = [];
 todoForm.addEventListener('submit', function(event) {
   // prevent the page from reloading when submitting the form
   event.preventDefault();
-  addTodo(todoInput.value); // call addTodo function with input box current value
+  const ass = getAssById(kanban.getAttribute("data-key"), kanban.getAttribute("course-id"));
+  addTodo(todoInput.value, ass); // call addTodo function with input box current value
 });
 
 // function to add todo
-function addTodo(item) {
+function addTodo(item, ass) {
   // if item is not empty
   if (item !== '') {
-    // make a todo object, which has id, name, and completed properties
-    /*const todo = {
-      id: Date.now(),
-      name: item,
-      completion: "toDo"
-    };*/
 
     const todo = new Task(item);
 
     // then add it to todos array
-    todos.push(todo);
-    addToLocalStorage(todos); // then store it in localStorage
-
+    ass.taskTodo.push(todo);
+    addCoursesToLocalStorage(courses); // then store it in localStorage
+    renderTasks(ass);
     // finally clear the input box value
     todoInput.value = '';
   }
@@ -476,7 +526,7 @@ function addTodo(item) {
 
 
 // function to render given todos to screen
-function renderTodos(todos) {
+function renderTasks() {
   // clear everything inside <ul> with class=todoTasks
   todoTasks.innerHTML = '';
 
@@ -512,22 +562,18 @@ function renderTodos(todos) {
 
 }
 
-// function to add todos to local storage
-function addToLocalStorage(todos) {
-  // conver the array to string then store it.
-  localStorage.setItem('todos', JSON.stringify(todos));
-  // render them to screen
-  renderTodos(todos);
-}
+
 
 // function helps to get everything from local storage
 function getFromLocalStorage() {
   const reference = localStorage.getItem('todos');
+  const ass = getAssById(kanban.getAttribute("data-key"), kanban.getAttribute("course-id"));
   // if reference exists
   if (reference) {
     // converts back to array and store it in todos array
     todos = JSON.parse(reference);
-    renderTodos(todos);
+    
+    renderTasks(ass);
   }
 }
 
@@ -557,15 +603,9 @@ function deleteTodo(id) {
 }
 
 // initially get everything from localStorage
-getFromLocalStorage();
 
 // after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
 todoTasks.addEventListener('click', function(event) {
-  // check if the event is on checkbox
-  if (event.target.type === 'checkbox') {
-    // toggle the state
-    toggle(event.target.parentElement.getAttribute('data-key'));
-  }
 
   // check if that is a delete-button
   if (event.target.classList.contains('delete-button')) {

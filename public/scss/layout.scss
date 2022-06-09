@@ -8,6 +8,8 @@
 	display: none;
   }
 
+
+
 button {
 	opacity: 0.5;
 	border: none;
@@ -23,19 +25,26 @@ button:hover {
 }  
 
 
-div.ass {
+.ass {
 	--color: #CE7B7B;
+	position: relative;
+	text-align: left;
 	width: 400px;
 	height: 110px;
 	border-radius: 15px;
 	margin-top: 25px;
 	background-color: #F3F3F3;
+	opacity: 1;
+	-webkit-transition-duration: 0.2s;
+	transition-duration: 0.2s;
 	.colorBar {
 		position: absolute;
 		width: 30px;
 		height: 110px;
 		background-color: var(--color);
 		border-radius: 15px 0px 0px 15px;
+		top: 0px;
+		left: 0px;
 	}
 	.assInfo {
 		h2, h3, h4, h5 {
@@ -44,8 +53,7 @@ div.ass {
 		width: 345px;
 		height: 92px;
 		position: relative;
-		top: 9px;
-		left: 42px;
+		left: 37px;
 		display: flex;
 		flex-direction: column;
 		flex-wrap: wrap;
@@ -81,6 +89,10 @@ div.ass {
 		}
 	}
 
+}
+
+.ass:hover {
+	opacity: 0.8;
 }
 
 div.course {

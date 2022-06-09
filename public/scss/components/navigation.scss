@@ -351,6 +351,7 @@
 
 
     #kanban {
+        visibility: hidden;
         position: absolute;
         left: 516px;
         right: 60px;
@@ -380,16 +381,27 @@
                 margin-top: 0px;
                 width: 100%;
 
+                .colorBar {
+                    left: 0px;
+                }
+
                 .assInfo {
                     width: 100%;
+                    top: 10px;
+                    left: 47px;
                     button {
                         visibility: hidden;
                     }
                     .priority {
-                        right: 30px;
+                        right: 33px;
                     }
                 }
             }
+
+            #assInKanban:hover {
+                opacity: 1;
+            }
+
         }
 
         #kanbanContainer {
