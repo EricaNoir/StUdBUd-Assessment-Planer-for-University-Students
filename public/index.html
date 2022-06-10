@@ -238,7 +238,7 @@
         </div>
         <!--tasks-->
         <div class="tasks" id="tTasksContainer">
-          <ul class="todoTasks">
+          <ul class="todoTasks" id="0"  ondrop="drop(event)" ondragover="allowDrop(event)">
             <!-- <li class="item" data-key="1594003133171">
               Go to Gym
               <button class="delete-button">
@@ -248,8 +248,8 @@
           </ul>
           <div class="formContainer">
             <form class="todo-form">
-              <input type="text" class="todo-input" placeholder="Add a task">
-              <button type="submit" class="add-button">
+              <input type="text" class="todo-input">
+              <button type="submit" class="add-button"  title="Save this task">
                 <img class="add" id="taskAdd" src="img/courseAdd.svg">
               </button>
             </form>
@@ -266,7 +266,7 @@
         </div>
         <!--tasks-->
         <div class="tasks" id="iTasksContainer">
-          <ul class="inprogressTasks">
+          <ul class="inprogressTasks" id="1" ondrop="drop(event)" ondragover="allowDrop(event)">
 
           </ul>
         </div>
@@ -280,7 +280,7 @@
         </div>
         <!--tasks-->
         <div class="tasks" id="dTasksContainer">
-          <ul class="doneTasks">
+          <ul class="doneTasks" id="2"  ondrop="drop(event)" ondragover="allowDrop(event)">
 
           </ul>
         </div>

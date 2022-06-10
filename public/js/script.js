@@ -70,10 +70,17 @@ function getAssById(id, course) {
 
 function openAss(id, courseId) {
   const course = getCourseById(courseId);
-  if (course != null) {
+  if (typeof(course) == "undefined") {
+    if (courseId == kanban.getAttribute("course-id")) {
+      kanban.style.visibility = "hidden";
+    }
+    else {
+      return;
+    }
+  }
+  else {
     const ass = getAssById(id, course);
-
-    if (typeof(ass)=="undefined"){
+    if (typeof(ass) == "undefined"){
       if (id == kanban.getAttribute("data-key")) {
         kanban.style.visibility = "hidden";
       }
@@ -103,7 +110,7 @@ function openAss(id, courseId) {
           </div>
         </div>
       `;
-      renderTasks();
+      renderTasks(ass);
     }
     
   }
@@ -389,6 +396,12 @@ function deleteCourse(id) {
   })
   addCoursesToLocalStorage(courses);
   renderCourse(courses);
+  if (id == kanban.getAttribute("course-id")) {
+    kanban.style.visibility = "hidden";
+  }
+  else {
+    return;
+  }
 }
 
 
@@ -522,15 +535,15 @@ const todoForm = document.querySelector('.todo-form');
 const todoInput = document.querySelector('.todo-input');
 // select the <ul> with class="todoTasks"
 const todoTasks = document.querySelector('.todoTasks');
+const inprogressTasks = document.querySelector('.inprogressTasks');
+const doneTasks = document.querySelector('.doneTasks');
 
-// array which stores every todos
-let todos = [];
 
 // add an eventListener on form, and listen for submit event
 todoForm.addEventListener('submit', function(event) {
   // prevent the page from reloading when submitting the form
   event.preventDefault();
-  const ass = getAssById(kanban.getAttribute("data-key"), kanban.getAttribute("course-id"));
+  const ass = getAssById(kanban.getAttribute("data-key"), getCourseById(kanban.getAttribute("course-id")));
   addTodo(todoInput.value, ass); // call addTodo function with input box current value
 });
 
@@ -542,7 +555,7 @@ function addTodo(item, ass) {
     const todo = new Task(item);
 
     // then add it to todos array
-    ass.taskTodo.push(todo);
+    ass.tasks.push(todo);
     addCoursesToLocalStorage(courses); // then store it in localStorage
     renderTasks(ass);
     // finally clear the input box value
@@ -552,45 +565,44 @@ function addTodo(item, ass) {
 
 
 // function to render given todos to screen
-function renderTasks() {
+function renderTasks(ass) {
   // clear everything inside <ul> with class=todoTasks
   todoTasks.innerHTML = '';
+  inprogressTasks.innerHTML = "";
+  doneTasks.innerHTML = "";
 
   // run through each item inside todos
-  todos.forEach(function(item) {
-    // check if the item is completed
-    const checked = item.completed ? 'checked': null;
+  for (let i = 0; i < ass.tasks.length; i++) {
+    printTask(ass.tasks[i]);
+  }
 
-    // make a <li> element and fill it
-    // <li> </li>
+}
+
+function printTask(item) {
     const li = document.createElement('li');
-    // <li class="item"> </li>
     li.setAttribute('class', 'item');
-    // <li class="item" data-key="20200708"> </li>
-    li.setAttribute('data-key', item.id);
-    /* <li class="item" data-key="20200708"> 
-          <input type="checkbox" class="checkbox">
-          Go to Gym
-          <button class="delete-button">X</button>
-        </li> */
-    // if item is completed, then add a class to <li> called 'checked', which will add line-through style
-    if (item.completed === true) {
-      li.classList.add('checked');
-    }
-
+    li.setAttribute('id', item.id);
+    li.setAttribute("draggable", "true");
+    li.setAttribute("ondragstart","drag(event)");
+    li.setAttribute("title", "you can drag me to other blocks")
     li.innerHTML = `
       ${item.name}
       <button class="delete-button">✕</button>
     `;
-    // finally add the <li> to the <ul>
-    todoTasks.append(li);
-  });
-
+    if (item.completion == 0) {
+      todoTasks.append(li);
+    }
+    else if (item.completion == 1) {
+      inprogressTasks.append(li);
+    }
+    else if (item.completion == 2) {
+      doneTasks.append(li);
+    }   
 }
 
 
 
-// function helps to get everything from local storage
+/* function helps to get everything from local storage
 function getFromLocalStorage() {
   const reference = localStorage.getItem('todos');
   const ass = getAssById(kanban.getAttribute("data-key"), kanban.getAttribute("course-id"));
@@ -601,42 +613,85 @@ function getFromLocalStorage() {
     
     renderTasks(ass);
   }
-}
+}*/
 
-// toggle the value to completed and not completed
-function toggle(id) {
-  todos.forEach(function(item) {
-    // use == not ===, because here types are different. One is number and other is string
-    if (item.id == id) {
-      // toggle the value
-      item.completed = !item.completed;
-    }
-  });
-
-  addToLocalStorage(todos);
-}
 
 // deletes a todo from todos array, then updates localstorage and renders updated list to screen
 function deleteTodo(id) {
   // filters out the <li> with the id and updates the todos array
-  todos = todos.filter(function(item) {
+
+  const ass = getAssById(kanban.getAttribute("data-key"), getCourseById(kanban.getAttribute("course-id")));
+  ass.tasks = ass.tasks.filter(function(item) {
     // use != not !==, because here types are different. One is number and other is string
     return item.id != id;
   });
 
   // update the localStorage
-  addToLocalStorage(todos);
+  addCoursesToLocalStorage(courses);
+  renderTasks(ass);
 }
 
 // initially get everything from localStorage
 
 // after that addEventListener <ul> with class=todoItems. Because we need to listen for click event in all delete-button and checkbox
 todoTasks.addEventListener('click', function(event) {
-
   // check if that is a delete-button
   if (event.target.classList.contains('delete-button')) {
     // get id from data-key attribute's value of parent <li> where the delete-button is present
-    deleteTodo(event.target.parentElement.getAttribute('data-key'));
+    deleteTodo(event.target.parentElement.getAttribute('id'));
   }
 });
+
+inprogressTasks.addEventListener('click', function(event) {
+  // check if that is a delete-button
+  if (event.target.classList.contains('delete-button')) {
+    // get id from data-key attribute's value of parent <li> where the delete-button is present
+    deleteTodo(event.target.parentElement.getAttribute('id'));
+  }
+});
+
+doneTasks.addEventListener('click', function(event) {
+  // check if that is a delete-button
+  if (event.target.classList.contains('delete-button')) {
+    // get id from data-key attribute's value of parent <li> where the delete-button is present
+    deleteTodo(event.target.parentElement.getAttribute('id'));
+  }
+});
+
+function drag(ev) {
+  ev.dataTransfer.setData("text", ev.target.id);
+}
+
+function allowDrop(ev) {
+  ev.preventDefault();
+}
+
+function getTaskById(id, assId, courseId) {
+  const course = getCourseById(courseId);
+  const ass = getAssById(assId, course);
+  return ass.tasks.find(function(task) {
+    return task.id == id;
+  });
+
+}
+
+function drop(ev) {
+  ev.preventDefault();
+  var data = ev.dataTransfer.getData("text");
+  const assId = kanban.getAttribute("data-key");
+  const courseId = kanban.getAttribute("course-id");
+  const task = getTaskById(data, assId, courseId);
+  if (ev.currentTarget.getAttribute("id") == 0) {
+    task.completion = 0;
+  }
+  else if (ev.currentTarget.getAttribute("id") == 1) {
+    task.completion = 1;
+  }
+  else if (ev.currentTarget.getAttribute("id") == 2) {
+    task.completion = 2;
+  }
+  ev.currentTarget.appendChild(document.getElementById(data));
+  addCoursesToLocalStorage(courses);
+ 
+}
 

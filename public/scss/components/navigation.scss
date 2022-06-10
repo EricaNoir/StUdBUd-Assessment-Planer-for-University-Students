@@ -414,6 +414,7 @@
                     justify-content: space-between;
                     align-content: space-between;
                     align-items: stretch;
+                    bottom: 1px;
                     button {
                         visibility: hidden;
                     }
@@ -450,6 +451,7 @@
             }
 
             ul{
+                height: 620px;
                 
                 .item {
                     width: 340px;
@@ -498,6 +500,7 @@
                 left: 20px;
                 height: 60px;
                 input {
+                    margin-top: 20px;
                     width: 340px;
                     height: 60px;
                     outline: none;
@@ -522,11 +525,11 @@
                 button {
                     opacity: 0.5;
                     border: none;
-                    position: absolute;
+                    position: relative;
                     background: transparent;
                     cursor: pointer;
-                    right: 60px;
-                    top: 15px;
+                    right: 54px;
+                    top: 6px;
                     -webkit-transition-duration: 0.2s;
                     transition-duration: 0.2s;
                 }
