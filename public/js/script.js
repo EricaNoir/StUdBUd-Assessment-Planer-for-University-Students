@@ -74,7 +74,12 @@ function openAss(id, courseId) {
     const ass = getAssById(id, course);
 
     if (typeof(ass)=="undefined"){
-      kanban.style.visibility = "hidden";
+      if (id == kanban.getAttribute("data-key")) {
+        kanban.style.visibility = "hidden";
+      }
+      else {
+        return;
+      }
     }
     else {
       kanban.style.visibility = "visible";
