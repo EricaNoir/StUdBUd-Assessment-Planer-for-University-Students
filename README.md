@@ -10,8 +10,8 @@
 
 # Reference 
 STOPWATCH | Cloudflare. (n.d.). 
-    Retrieved from https://codepen.io/cathydutton/pen/xxpOOw
+    Retrieved from https://codepen.io/cathydutton/pen/xxpOOw\n
 Pie, T. (2022, March 30). How to Build a Todo List App With Javascript and Local Storage. 
-    Retrieved from https://thecodingpie.medium.com/how-to-build-a-todo-list-app-with-javascript-and-local-storage-a884f4ea3ec
+    Retrieved from https://thecodingpie.medium.com/how-to-build-a-todo-list-app-with-javascript-and-local-storage-a884f4ea3ec\n
 kanban board with html, css and js | Cloudflare. (n.d.-b). 
     Retrieved from https://codepen.io/karthikdevarticles/pen/PopxPwO
