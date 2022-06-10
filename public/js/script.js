@@ -62,7 +62,7 @@ linkContainer.addEventListener('click', function(event) {
 })
 
 const kanban = document.getElementById('kanban');
-
+const des = document.getElementById('description');
 function getAssById(id, course) {
   return course.assessments.find(function(ass) {
     return ass.id == id;
@@ -74,6 +74,7 @@ function openAss(id, courseId) {
   if (typeof(course) == "undefined") {
     if (courseId == kanban.getAttribute("course-id")) {
       kanban.style.visibility = "hidden";
+      des.style.visibility = "visible";
     }
     else {
       return;
@@ -84,6 +85,7 @@ function openAss(id, courseId) {
     if (typeof(ass) == "undefined"){
       if (id == kanban.getAttribute("data-key")) {
         kanban.style.visibility = "hidden";
+        des.style.visibility = "visible";
       }
       else {
         return;
@@ -91,6 +93,7 @@ function openAss(id, courseId) {
     }
     else {
       kanban.style.visibility = "visible";
+      des.style.visibility = "hidden";
       kanban.setAttribute("data-key", id);
       kanban.setAttribute("course-id", courseId);
       const assInKanban = document.getElementById("assInKanban");
@@ -399,6 +402,7 @@ function deleteCourse(id) {
   renderCourse(courses);
   if (id == kanban.getAttribute("course-id")) {
     kanban.style.visibility = "hidden";
+    des.style.visibility = "visible";
   }
   else {
     return;
