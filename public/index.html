@@ -16,15 +16,15 @@
       <h1 class="formTitle">Add a course</h1>
       <div class="inputContainer">
         <h3 class="inputText">COURSE NAME</h3>
-        <input type="text" class="courseNamaInput" placeholder="This is a course called...">
+        <input type="text" required="required" class="courseNamaInput" placeholder="This is a course called...">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">COURSE CODE</h3>
-        <input type="text" class="courseCodeInput" placeholder="Code">
+        <input type="text" required="required" class="courseCodeInput" placeholder="Code">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">DESCRIPTION</h3>
-        <input type="text" class="courseDesInput" placeholder="This is a course about...">
+        <input type="text" required="required" class="courseDesInput" placeholder="This is a course about...">
       </div>
       <button type="reset" class="cancel-button" title="Cancel" id="courseDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
       <button type="submit" class="add-button" title="Save the course" id="courseAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
@@ -36,15 +36,15 @@
       <h1 class="formTitle">Add a resource</h1>
       <div class="inputContainer">
         <h3 class="inputText">TITLE</h3>
-        <input type="text" class="linkNamaInput" id="linkNameInput" placeholder="This is a resource called...">
+        <input type="text" required="required" class="linkNamaInput" id="linkNameInput" placeholder="This is a resource called...">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">LINK</h3>
-        <input type="url" class="linkInput" id="linkInput" placeholder="Url...">
+        <input type="url" required="required" class="linkInput" id="linkInput" placeholder="Url...">
       </div>
       <div class="inputContainer">
         <h3 class="inputText">DESCRIPTION</h3>
-        <input type="text" class="linkDesInput" id="linkDesInput" placeholder="This is a resource about...">
+        <input type="text" required="required" class="linkDesInput" id="linkDesInput" placeholder="This is a resource about...">
       </div>
       <button type="reset" class="cancel-button" title="Cancel" id="linkDeleteButton"><div class="innerDelete"><h2>Cancel</h2></div></button>
       <button type="submit" class="add-button" title="Save the link" id="linkAddButton"><div class="innerAdd"><h2>Add</h2></div></button>
@@ -57,27 +57,27 @@
       <h1 class="form-title">Add an assessment</h1>
       <div class="inputContainer">
         <h3 class="inputText">NAME</h3>
-        <input type="text" class="assNameInput" id="assNameInput" placeholder="Assessment called...">
+        <input type="text" required="required" class="assNameInput" id="assNameInput" placeholder="Assessment called...">
       </div>
 
       <div class="inputContainer">
         <h3 class="inputText">DESCRIPTION</h3>
-        <input type="text" class="assDesInput" id="assDesInput" placeholder="Percentage / explanation">
+        <input type="text" required="required" class="assDesInput" id="assDesInput" placeholder="Percentage / explanation">
       </div>
 
       <div class="inputContainer">
         <h3 class="inputText">ESTIMATED COMPLETION TIME</h3>
-        <input type="time" class="assTimeToCompleteInput" id="assTimeToCompleteInput">
+        <input type="time" required="required" class="assTimeToCompleteInput" id="assTimeToCompleteInput">
       </div>
 
       <div class="inputContainer">
         <h3 class="inputText">DUE DATE</h3>
-        <input type="date" class="assDueDateInput" id="assDueDateInput">
+        <input type="date" required="required" class="assDueDateInput" id="assDueDateInput">
       </div>
 
       <div class="inputContainer">
         <h3 class="inputText">PRIORITY</h3>
-        <select name="prority" class="assPriorityInput" id="assPriorityInput">
+        <select name="prority" required="required" class="assPriorityInput" id="assPriorityInput">
           <option value="">Select one</option>
           <option value="Low">Low</option>
           <option value="Medium">Medium</option>
