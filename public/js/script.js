@@ -70,11 +70,13 @@ function getAssById(id, course) {
 
 function openAss(id, courseId) {
   const course = getCourseById(courseId);
-  console.log(course);
   if (course != null) {
     const ass = getAssById(id, course);
-    console.log(ass);
-    if (ass != null) {
+
+    if (typeof(ass)=="undefined"){
+      kanban.style.visibility = "hidden";
+    }
+    else {
       kanban.style.visibility = "visible";
       kanban.setAttribute("data-key", id);
       kanban.setAttribute("course-id", courseId);
@@ -107,15 +109,15 @@ function openAss(id, courseId) {
 
 assContainerInCourse.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
-    deleteAss(event.target.parentElement.parentElement.getAttribute('data-key'), addAssForm.getAttribute("data-key"));
-    //openAss(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
+    deleteAss(event.target.parentElement.firstChild.getAttribute('data-key'), addAssForm.getAttribute("data-key"));
+    openAss(event.target.parentElement.firstChild.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
   }
 
 })
 assContainer.addEventListener('click', function(event) {
   if (event.target.classList.contains("delete-button")) {
-    deleteAss_b(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
-    openAss(event.target.parentElement.parentElement.getAttribute('data-key'), event.target.parentElement.parentElement.getAttribute('course-id'));
+    deleteAss_b(event.target.parentElement.firstChild.getAttribute('data-key'), event.target.parentElement.firstChild.getAttribute('course-id'));
+    openAss(event.target.parentElement.firstChild.getAttribute('data-key'), event.target.parentElement.firstChild.getAttribute('course-id'));
   }
 
 })
@@ -216,6 +218,8 @@ function showDetails(course) {
 }
 
 function printAss(a) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "assDiv")
   const ass = document.createElement("button");
   const color = getCourseById(a.courseId).color;
   ass.style.setProperty("--color", color);
@@ -232,16 +236,19 @@ function printAss(a) {
       <p class="percentage">${a.description}</p>
       <p class="completionTime">Need ${a.timeToComplete} to complete</p>
       <h4 class="ddl">Due at ${a.dueDate}</h4>
-      <button class="delete-button" title="Mark as completed">
-        Complete
-      </button>
       <div class="priority">
         <h5 class="priority">${a.priority}</h5>
       </div>
     </div>
   
   `;
-  assContainerInCourse.appendChild(ass);
+  div.appendChild(ass);
+  div.innerHTML += `
+  <button class="delete-button" title="Mark as completed">
+    Complete
+  </button>`;
+  div.lastChild.style.backgroundColor = color;
+  assContainerInCourse.appendChild(div);
 }
 function printLink(l) {
   const link = document.createElement("div");
@@ -261,13 +268,27 @@ function printLink(l) {
 let courses = [];
 
 let colors = ["#AE7FB5","#5B8E7D", "#BC4B51", "#F4A259", 
-              "#8C6D67", "#C0CB77", "#7EA9CE", "#6D9CA6",   
-              "#DB7F5D", "#8EAD7A"];
+              "#8C6D67", "#C0CB77", "#DB7F5D", "#6D9CA6",   
+              "#7EA9CE", "#8EAD7A",];
 
 let i = 0;
 
+function getIndexFromLocalStorage() {
+  let i = JSON.parse(localStorage.getItem('index'));
+  return i;
+}
+
+function saveIndexToLocalStorage(i) {
+  localStorage.setItem("index", JSON.stringify(i));
+}
+
 function getRandomColor() {
+  let i = getIndexFromLocalStorage();
   i += 1;
+  if (i > colors.length) {
+    i -= 10;
+  }
+  saveIndexToLocalStorage(i);
   return colors[i-1];
 }
 
@@ -410,6 +431,8 @@ function renderCourse(courses) {
 }
 
 function asshtml(a) {
+  const div = document.createElement("div");
+  div.setAttribute("class", "assDiv");
   const ass = document.createElement("button");
   const color = getCourseById(a.courseId).color;
   ass.style.setProperty("--color", color);
@@ -426,16 +449,19 @@ function asshtml(a) {
       <p class="percentage">${a.description}</p>
       <p class="completionTime">Need ${a.timeToComplete} to complete</p>
       <h4 class="ddl">Due at ${a.dueDate}</h4>
-      <button class="delete-button" title="Mark as completed">
-        Complete
-      </button>
       <div class="priority">
         <h5 class="priority">${a.priority}</h5>
       </div>
     </div>
   
   `;
-  assContainer.appendChild(ass);
+  div.appendChild(ass);
+  div.innerHTML += `
+  <button class="delete-button" title="Mark as completed">
+    Complete
+  </button>`;
+  div.lastChild.style.backgroundColor = color;
+  assContainer.appendChild(div);
 }
 
 function coursehtml(c) {

@@ -24,76 +24,86 @@ button:hover {
 	opacity: 1;
 }  
 
+.assDiv:first-child {
+	
+	margin-top: 20px;
+}
 
-.ass {
+.assDiv {
 	--color: #CE7B7B;
-	position: relative;
-	text-align: left;
-	width: 400px;
-	height: 110px;
-	border-radius: 15px;
-	margin-top: 25px;
-	background-color: #F3F3F3;
-	opacity: 1;
-	-webkit-transition-duration: 0.2s;
-	transition-duration: 0.2s;
-	.colorBar {
-		position: absolute;
-		width: 30px;
-		height: 110px;
-		background-color: var(--color);
-		border-radius: 15px 0px 0px 15px;
-		top: 0px;
-		left: 0px;
-	}
-	.assInfo {
-		h2, h3, h4, h5 {
-			color: var(--color);
-		}
-		width: 345px;
-		height: 92px;
-		position: relative;
-		left: 37px;
+	.delete-button {
 		display: flex;
-		flex-direction: column;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		align-content: space-between;
-		align-items: stretch;
-		button {
-			display: flex;
-			right: 0px;
+		left: 155px;
+		bottom: 32px;
+		background-color: var(--color);
+		color: white;
+		width: 67px;
+		height: 23px;
+		border-radius: 5px;
+		font-size: 14px;
+		margin: 0 auto;
+		position: relative;
+	}
+	
+	.ass {
+		position: relative;
+		text-align: left;
+		width: 400px;
+		height: 110px;
+		border-radius: 15px;
+		background-color: #F3F3F3;
+		opacity: 1;
+		-webkit-transition-duration: 0.2s;
+		transition-duration: 0.2s;
+		.colorBar {
+			position: absolute;
+			width: 30px;
+			height: 110px;
 			background-color: var(--color);
-			color: white;
-			width: 67px;
-            height: 23px;
-            border-radius: 5px;
-            font-size: 14px;
-            margin: 0 auto;
-            position: relative;
+			border-radius: 15px 0px 0px 15px;
+			top: 0px;
+			left: 0px;
 		}
-		.ddl {
+		.assInfo {
+			h2, h3, h4, h5 {
+				color: var(--color);
+			}
+			width: 345px;
+			height: 92px;
 			position: relative;
-			bottom: 0px;
+			left: 37px;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			align-content: space-between;
+			align-items: stretch;
+	
+			.ddl {
+				position: relative;
+				bottom: 0px;
+			}
+			.priority {
+				position: relative;
+				text-align: right;
+			}
+			
+			p {
+				position: relative;
+				top: 1px;
+			}
 		}
-		.priority {
-			position: relative;
-			bottom: -5px;
-			text-align: right;
-			right: 2px;
-		}
-		
-		p {
-			position: relative;
-			top: 1px;
-		}
+	
 	}
 
+	button.ass:hover {
+		opacity: 0.8;
+	}
 }
 
-.ass:hover {
-	opacity: 0.8;
-}
+
+
+
 
 div.course {
 	margin-top: 20px;
