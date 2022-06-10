@@ -180,7 +180,7 @@
         }
     
         .logoContainer {
-            width: 454px;
+            width: 100%;
             height: 68px;
             left: 0px;
             top: 0px;
@@ -270,19 +270,25 @@
     #courseView {
         visibility: hidden;
         --color: #586bdb;
-
-        .back-home {
-            width: 50px;
-            height: 23px;
-            background-color: var(--color);
-            color: white;
-            border-radius: 5px;
-            font-size: 14px;
-            margin: 0 auto;
-            position: absolute;
-            left: 387px;
-            top: 31px;
+        .logoContainer {
+            display: flex;
+            justify-content: space-between;
+            .logo {
+                position: relative;
+            }
+            .back-home {
+                width: 50px;
+                height: 23px;
+                background-color: var(--color);
+                color: white;
+                border-radius: 5px;
+                font-size: 14px;
+                position: relative;
+                top: 30px;
+                margin-right: 15px;
+            }
         }
+        
 
         #courseName, button.add {
             color: var(--color);
@@ -608,13 +614,43 @@
             height: 980px;
         }
     }
-    @media screen and (max-width: 990px) {
-        #kanban {
-            visibility: hidden;
-        }
+
+    
+    
+}
+
+@media screen and (max-width: 1000px) {
+    #kanban {
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
     }
-    
-    
+}
+
+@media screen and (max-width: 420px) {
+    img {
+        visibility: hidden;
+    }
+    #kanban {
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+    }
+    #homeView, #courseView{
+        width: 100%;
+        height: 100%;
+    }
+}
+@media screen and (max-width: 380px) {
+    #kanban {
+        visibility: hidden;
+        width: 0px;
+        height: 0px;
+    }
+    #homeView, #courseView{
+        width: 110%;
+        height: 110%;
+    }
 }
 
 

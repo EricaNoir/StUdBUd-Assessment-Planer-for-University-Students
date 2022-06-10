@@ -1,0 +1,30 @@
+.musicPlayer {
+    position: absolute;
+    bottom: 70px;
+    right: 200px;
+
+    h4 {
+        font-size: 15px;
+        width: 280px;
+        height: 30px;
+        overflow: scroll;
+        position: absolute;
+    }
+    div {
+        position: relative;
+        bottom: 2px;
+        left: 190px;
+    }
+    button {
+        color: black;
+        position: relative;
+    }
+    audio {
+        top: 25px;
+        position: absolute;
+        visibility: hidden;
+    }
+    #m0 {
+        visibility: visible;
+    }
+}

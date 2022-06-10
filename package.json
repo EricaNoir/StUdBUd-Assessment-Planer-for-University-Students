@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.5.0",
+    "mediaelementjs": "^4.2.10",
     "parcel": "^2.5.0"
   }
 }

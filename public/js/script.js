@@ -1,3 +1,4 @@
+
 function createCourse() {
   const courseForm = document.getElementById("addCourseForm");
   courseForm.style.visibility = "visible";
@@ -695,3 +696,112 @@ function drop(ev) {
  
 }
 
+
+
+const musicPlayer = document.querySelector(".musicPlayer");
+index = 0;
+const musicName = document.getElementById("name");
+
+musicPlayer.addEventListener("click", function(event) {
+  if (event.target.classList.contains("pre")) {
+    playPre();
+  }
+  if (event.target.classList.contains('next')) {
+    playNext();
+  }
+})
+
+function playPre() {
+  const currentMusic = getMusic(index);
+  index -= 1;
+  if (index < 0) {
+    index += 10;
+  }
+  const lastMusic = getMusic(index);
+  currentMusic.style.visibility = 'hidden';
+  currentMusic.pause();
+  musicName.innerHTML = lastMusic.getAttribute("name");
+  lastMusic.style.visibility = 'visible';
+  lastMusic.play();
+}
+
+function playNext() {
+  const currentMusic = getMusic(index);
+  index += 1;
+  if (index > 9) {
+    index -= 10;
+  }
+  const nextMusic = getMusic(index);
+  currentMusic.style.visibility = 'hidden';
+  currentMusic.pause();
+  musicName.innerHTML = nextMusic.getAttribute("name");
+  nextMusic.style.visibility = 'visible';
+  nextMusic.play();
+}
+
+function getMusic(index) {
+  const music = document.getElementById("m" + index);
+  return music;
+}
+
+
+window.onload = function () {
+  
+  var seconds = 00; 
+  var tens = 00; 
+  var appendTens = document.getElementById("tens")
+  var appendSeconds = document.getElementById("seconds")
+  var buttonStart = document.getElementById('button-start');
+  var buttonStop = document.getElementById('button-stop');
+  var buttonReset = document.getElementById('button-reset');
+  var Interval ;
+
+  buttonStart.onclick = function() {
+    
+    clearInterval(Interval);
+     Interval = setInterval(startTimer, 10);
+  }
+  
+    buttonStop.onclick = function() {
+       clearInterval(Interval);
+  }
+  
+
+  buttonReset.onclick = function() {
+     clearInterval(Interval);
+    tens = "00";
+  	seconds = "00";
+    appendTens.innerHTML = tens;
+  	appendSeconds.innerHTML = seconds;
+  }
+  
+   
+  
+  function startTimer () {
+    tens++; 
+    
+    if(tens <= 9){
+      appendTens.innerHTML = "0" + tens;
+    }
+    
+    if (tens > 9){
+      appendTens.innerHTML = tens;
+      
+    } 
+    
+    if (tens > 99) {
+      console.log("seconds");
+      seconds++;
+      appendSeconds.innerHTML = "0" + seconds;
+      tens = 0;
+      appendTens.innerHTML = "0" + 0;
+    }
+    
+    if (seconds > 9){
+      appendSeconds.innerHTML = seconds;
+    }
+  
+  }
+  
+
+}
