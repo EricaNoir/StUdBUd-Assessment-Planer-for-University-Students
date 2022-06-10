@@ -1,3 +1,8 @@
+###Original repositories:
+https://github.com/EricaNoir/studbud
+
+(unfortunately broken)
+
 # What is a StUdBUd?
 >StUdBUd is an app aiming to help university students planning their time on assessments.
 
@@ -14,6 +19,6 @@ STOPWATCH | Cloudflare. (n.d.).
 
 Pie, T. (2022, March 30). How to Build a Todo List App With Javascript and Local Storage. 
     Retrieved from https://thecodingpie.medium.com/how-to-build-a-todo-list-app-with-javascript-and-local-storage-a884f4ea3ec
-    
+
 kanban board with html, css and js | Cloudflare. (n.d.-b). 
     Retrieved from https://codepen.io/karthikdevarticles/pen/PopxPwO
