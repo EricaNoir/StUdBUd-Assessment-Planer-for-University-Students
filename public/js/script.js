@@ -239,8 +239,8 @@ function printAss(a) {
     <div class="assInfo">
       <h3 class="assName">${a.name}</h3>
       <p class="percentage">${a.description}</p>
-      <p class="completionTime">Need ${a.timeToComplete} to complete</p>
-      <h4 class="ddl">Due at ${a.dueDate}</h4>
+      <p class="completionTime">${a.timeToComplete} <span style="color: #6B6B6B">to complete</span></p>
+      <h4 class="ddl"><span style="color: #9b9b9b">Due at </span>${a.dueDate}</h4>
       <div class="priority">
         <h5 class="priority">${a.priority}</h5>
       </div>
@@ -321,19 +321,14 @@ function Link(linkName, link, linkDes, id) {
 }
   
 function Assessment(name, description, timeToComplete, dueDate, priority, id) {
-  let taskTodo = [];
-  let taskInprogress = [];
-  let taskDone = [];
   this.name = name;
   this.description = description;
-  this.timeToComplete = timeToComplete;
-  this.dueDate = dueDate;
+  this.timeToComplete = timeToComplete.split(':')[0] + " hours " + timeToComplete.split(':')[1] +" mins";
+  this.dueDate = dueDate.split('-')[2] + "/" + dueDate.split('-')[1] + "/" + dueDate.split('-')[0];
   this.priority = priority;
   this.courseId = id;
 
-  this.taskTodo = taskTodo;
-  this.taskInprogress = taskInprogress;
-  this.taskDone = taskDone;
+  this.tasks = [];
   this.id = Date.now();
 }
 
@@ -452,8 +447,8 @@ function asshtml(a) {
     <div class="assInfo">
       <h3 class="assName">${a.name}</h3>
       <p class="percentage">${a.description}</p>
-      <p class="completionTime">Need ${a.timeToComplete} to complete</p>
-      <h4 class="ddl">Due at ${a.dueDate}</h4>
+      <p class="completionTime">${a.timeToComplete} <span style="color: #6B6B6B">to complete</span></p>
+      <h4 class="ddl"><span style="color: #9b9b9b">Due at </span>${a.dueDate}</h4>
       <div class="priority">
         <h5 class="priority">${a.priority}</h5>
       </div>
