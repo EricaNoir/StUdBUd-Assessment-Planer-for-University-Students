@@ -2,6 +2,15 @@ Original repositories: (unfortunately broken)
 
 https://github.com/EricaNoir/studbud
 
+# How to use
+>Step 1: Install Node.js, If you have already installed Node.js, go to step 2.
+
+>Step 2: Clone the project to your local computer.
+
+>Step 3: In your terminal, run *__npm install__* and *__npm run dev__* to start the project.
+
+
+
 
 # What is a StUdBUd?
 >StUdBUd is an app aiming to help university students planning their time on assessments.
