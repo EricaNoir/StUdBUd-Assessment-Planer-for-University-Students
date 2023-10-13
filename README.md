@@ -1,7 +1,3 @@
-Original repositories: (unfortunately broken)
-
-https://github.com/EricaNoir/studbud
-
 # How to use
 >Step 1: Install Node.js, If you have already installed Node.js, go to step 2.
 
